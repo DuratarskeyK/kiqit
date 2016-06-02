@@ -8,6 +8,9 @@ module Kiqit
           record       = runner_klass.find(id)
           
           perform_job(record, method, args)
+        ensure
+          ActiveRecord::Base.clear_active_connections!
+          ActiveRecord::Base.connection.close
         end
       end
     end
