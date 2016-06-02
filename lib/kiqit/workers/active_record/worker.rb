@@ -9,8 +9,8 @@ module Kiqit
           
           perform_job(record, method, args)
         ensure
-          ActiveRecord::Base.clear_active_connections!
-          ActiveRecord::Base.connection.close
+          ::ActiveRecord::Base.clear_active_connections!
+          ::ActiveRecord::Base.connection.close
         end
       end
     end
