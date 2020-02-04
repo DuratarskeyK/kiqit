@@ -5,7 +5,7 @@ module Kiqit
         def perform(klass, id, method, *args)
           # Remove the loner flag from redis
           digest       = Kiqit::PayloadHelper.get_digest(klass, method, args)
-          Sidekiq.redis do { |r| r.del(digest) }
+          Sidekiq.redis { |r| r.del(digest) }
           
           args         = Kiqit::ArgsParser.args_from_sidekiq(args)
           runner_klass = klass.constantize
